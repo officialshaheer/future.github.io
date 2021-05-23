@@ -12,5 +12,24 @@ html, body {
     left: 0;
     outline: none;
 }
+ul {
+    background-color: #262837;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  li {
+    background-color: #262837;
+    display: inline;
+    color: white;
+  }
+
+.row {
+    z-index: 999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
 /*# sourceMappingURL=main.css.map*/
