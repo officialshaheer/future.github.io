@@ -447,9 +447,11 @@ class PortfolioComponent {
         const bakedTexture = textureLoader.load('assets/models/2/baked.jpg');
         bakedTexture.flipY = false;
         bakedTexture.encoding = three__WEBPACK_IMPORTED_MODULE_0__["sRGBEncoding"];
+        //foootball
+        const ballTexture = textureLoader.load('assets/models/2/football.jpg');
         // Material
         //Baked Material
-        const bakedMaterial = new three__WEBPACK_IMPORTED_MODULE_0__["MeshBasicMaterial"]({ map: bakedTexture });
+        const bakedMaterial = new three__WEBPACK_IMPORTED_MODULE_0__["MeshBasicMaterial"]({ map: bakedTexture, side: three__WEBPACK_IMPORTED_MODULE_0__["DoubleSide"] });
         // Model
         gltfLoader.load('assets/models/2/model.glb', (gltf) => {
             const mergedMesh = gltf.scene.children.find((child) => child.name === 'baked');
@@ -460,6 +462,16 @@ class PortfolioComponent {
             gltf.scene.receiveShadow = true;
             this.models.push(gltf.scene);
         });
+        const geometry = new three__WEBPACK_IMPORTED_MODULE_0__["SphereGeometry"](0.15, 32, 32);
+        const material = new three__WEBPACK_IMPORTED_MODULE_0__["MeshBasicMaterial"]({ map: ballTexture });
+        const ball = new three__WEBPACK_IMPORTED_MODULE_0__["Mesh"](geometry, material);
+        scene.add(ball);
+        ball.position.y = 0.15;
+        ball.castShadow = true;
+        ball.receiveShadow = true;
+        const light = new three__WEBPACK_IMPORTED_MODULE_0__["AmbientLight"](0x404040); // soft white light
+        scene.add(light);
+        light.position.y = 2;
         // Font Loader
         const fontLoader = new three__WEBPACK_IMPORTED_MODULE_0__["FontLoader"]();
         fontLoader.load('assets/fonts/helvetiker_regular.typeface.json', (font) => {

@@ -874,11 +874,14 @@
 
             var bakedTexture = textureLoader.load('assets/models/2/baked.jpg');
             bakedTexture.flipY = false;
-            bakedTexture.encoding = three__WEBPACK_IMPORTED_MODULE_0__["sRGBEncoding"]; // Material
+            bakedTexture.encoding = three__WEBPACK_IMPORTED_MODULE_0__["sRGBEncoding"]; //foootball
+
+            var ballTexture = textureLoader.load('assets/models/2/football.jpg'); // Material
             //Baked Material
 
             var bakedMaterial = new three__WEBPACK_IMPORTED_MODULE_0__["MeshBasicMaterial"]({
-              map: bakedTexture
+              map: bakedTexture,
+              side: three__WEBPACK_IMPORTED_MODULE_0__["DoubleSide"]
             }); // Model
 
             gltfLoader.load('assets/models/2/model.glb', function (gltf) {
@@ -894,7 +897,20 @@
               gltf.scene.receiveShadow = true;
 
               _this3.models.push(gltf.scene);
-            }); // Font Loader
+            });
+            var geometry = new three__WEBPACK_IMPORTED_MODULE_0__["SphereGeometry"](0.15, 32, 32);
+            var material = new three__WEBPACK_IMPORTED_MODULE_0__["MeshBasicMaterial"]({
+              map: ballTexture
+            });
+            var ball = new three__WEBPACK_IMPORTED_MODULE_0__["Mesh"](geometry, material);
+            scene.add(ball);
+            ball.position.y = 0.15;
+            ball.castShadow = true;
+            ball.receiveShadow = true;
+            var light = new three__WEBPACK_IMPORTED_MODULE_0__["AmbientLight"](0x404040); // soft white light
+
+            scene.add(light);
+            light.position.y = 2; // Font Loader
 
             var fontLoader = new three__WEBPACK_IMPORTED_MODULE_0__["FontLoader"]();
             fontLoader.load('assets/fonts/helvetiker_regular.typeface.json', function (font) {
